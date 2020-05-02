@@ -1,4 +1,4 @@
-package com.aratel.weatherapp
+package com.aratel.weatherapp.activities
 
 import android.view.ViewGroup
 import android.widget.TextView
@@ -11,11 +11,13 @@ class ForecastListAdapter(val items: List<String>) :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ForecastListAdapter.ViewHolder {
-        return ViewHolder(TextView(parent.context))
+    ): ViewHolder {
+        return ViewHolder(
+            TextView(parent.context)
+        )
     }
 
-    override fun onBindViewHolder(holder: ForecastListAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.textView.text = items[position]
     }
 
