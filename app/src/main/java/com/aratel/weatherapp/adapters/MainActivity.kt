@@ -1,10 +1,15 @@
-package com.aratel.weatherapp
+package com.aratel.weatherapp.adapters
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_main.*
+import com.aratel.weatherapp.R
+import com.aratel.weatherapp.activities.ForecastListAdapter
+import com.aratel.weatherapp.data.Request
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.longToast
+import org.jetbrains.anko.uiThread
 
 /**
  * This activity will render a list of daily forecasts for the next seven days
@@ -37,7 +42,24 @@ class MainActivity : AppCompatActivity() {
 
         val forecastList = findViewById<RecyclerView>(R.id.forecast_list)
         forecastList.layoutManager = LinearLayoutManager(this)
-        forecastList.adapter = ForecastListAdapter(items)
+        forecastList.adapter =
+            ForecastListAdapter(items)
+
+        val url = "https://api.openweathermap.org/data/2.5/forecast/daily?APPID=15646a06818f61f7b8d7823ca833e1ce&zip=94043&mode=json&units=metric&cnt=7"
+
+        /**
+         * uiThread has a different implementations depending on
+         * the caller object. If it’s used by an Activity,
+         * the uiThread code won’t be executed if activity.isFinishing() returns true,
+         * and it won’t crash if the activity is no longer valid.
+         */
+        /**
+         * doAsync returns a java Future
+         */
+        doAsync {
+            Request(url).run()
+            uiThread { longToast("Request Performed") }
+        }
 
     }
 }
