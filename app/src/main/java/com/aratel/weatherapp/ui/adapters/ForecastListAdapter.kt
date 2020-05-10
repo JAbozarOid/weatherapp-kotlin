@@ -26,13 +26,24 @@ class ForecastListAdapter(private val weekForecast: ForecastList) :
      */
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        with(weekForecast.dailyForecast[position]) {
+        /**
+         * we can get the size of weekForecast list like this
+         */
+        /*with(weekForecast.dailyForecast[position]) {
+            holder.textView.text = "$date - $description - $high/$low"
+        }*/
+
+        /**
+         * or we can get the size of the weekForecast list by implementation get method ForecastList data class in DomainClasses
+         */
+        with(weekForecast[position]) {
             holder.textView.text = "$date - $description - $high/$low"
         }
     }
 
     override fun getItemCount(): Int {
-        return weekForecast.dailyForecast.size
+        //return weekForecast.dailyForecast.size
+        return weekForecast.size
     }
 
 
