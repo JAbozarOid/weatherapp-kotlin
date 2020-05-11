@@ -5,11 +5,9 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aratel.weatherapp.R
-import com.aratel.weatherapp.data.ForecastRequest
 import com.aratel.weatherapp.domain.commands.RequestForecastCommand
 import com.aratel.weatherapp.ui.adapters.ForecastListAdapter
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.longToast
 import org.jetbrains.anko.uiThread
 
 /**
