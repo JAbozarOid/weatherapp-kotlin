@@ -7,6 +7,6 @@ package com.aratel.weatherapp.domain.commands
 /**
  * The first command needs to request the forecast to the API and convert it to domain classes.
  */
-public interface Command<out T> {
+interface Command<out T> {
     fun execute(): T
 }

@@ -43,12 +43,13 @@ class ForecastListAdapter(private val weekForecast: ForecastList) :
 
     override fun getItemCount(): Int {
         //return weekForecast.dailyForecast.size
+        /**
+         * according to onBindViewHolder use above or below code
+         */
         return weekForecast.size
     }
 
 
-    class ViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView) {
-
-    }
+    class ViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView)
 
 }
