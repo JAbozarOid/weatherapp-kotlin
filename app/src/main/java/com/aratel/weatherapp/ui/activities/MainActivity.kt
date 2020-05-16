@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aratel.weatherapp.R
 import com.aratel.weatherapp.domain.commands.RequestForecastCommand
+import com.aratel.weatherapp.domain.model.Forecast
 import com.aratel.weatherapp.ui.adapters.ForecastListAdapter
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 
 /**
@@ -54,7 +56,13 @@ class MainActivity : AppCompatActivity() {
         doAsync {
             val result = RequestForecastCommand("94043").execute()
             uiThread {
-                forecastList.adapter = ForecastListAdapter(result)
+                // to implement an anonymous class, we in fact create an object that implements the interface we created
+                forecastList.adapter = ForecastListAdapter(result,object : ForecastListAdapter.OnItemClickListener {
+                    override fun invoke(forecast: Forecast) {
+                        toast(forecast.date)
+                    }
+
+                })
             }
         }
 
