@@ -40,7 +40,6 @@ class MainActivity : AppCompatActivity() {
         //message.text = "Hello Kotlin!"
 
 
-
         val forecastList = findViewById<RecyclerView>(R.id.forecast_list)
         forecastList.layoutManager = LinearLayoutManager(this)
 
@@ -57,12 +56,19 @@ class MainActivity : AppCompatActivity() {
             val result = RequestForecastCommand("94043").execute()
             uiThread {
                 // to implement an anonymous class, we in fact create an object that implements the interface we created
-                forecastList.adapter = ForecastListAdapter(result,object : ForecastListAdapter.OnItemClickListener {
+                // 1- implement click on items with interface
+                /*forecastList.adapter = ForecastListAdapter(result,object : ForecastListAdapter.OnItemClickListener {
                     override fun invoke(forecast: Forecast) {
                         toast(forecast.date)
                     }
 
-                })
+                })*/
+
+                // 2- implement click on items with lambdas >>> below is the one way impl
+                //forecastList.adapter = ForecastListAdapter(result) { forecast -> toast(forecast.date) }
+
+                // 2- implement click on items with lambdas >>> below is the another way impl
+                forecastList.adapter = ForecastListAdapter(result) { toast(it.date) }
             }
         }
 

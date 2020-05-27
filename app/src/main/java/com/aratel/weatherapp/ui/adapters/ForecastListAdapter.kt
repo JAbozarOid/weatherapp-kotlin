@@ -18,7 +18,9 @@ import java.util.zip.Inflater
 
 class ForecastListAdapter(
     private val weekForecast: ForecastList,
-    private val itemClick: ForecastListAdapter.OnItemClickListener
+    //private val itemClick: ForecastListAdapter.OnItemClickListener
+    // using lambdas for click in items of list like below
+    private val itemClick: (Forecast) -> Unit
 ) :
     RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
 
@@ -78,7 +80,12 @@ class ForecastListAdapter(
     //class ViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView)
 
     // handle item_forecast view with this class
-    class ViewHolder(view: View, val itemClick: OnItemClickListener) :
+    class ViewHolder(
+        view: View,
+        //val itemClick: OnItemClickListener
+        // using lambdas for handling click on item
+        val itemClick: (Forecast) -> Unit
+    ) :
         RecyclerView.ViewHolder(view) {
         private val iconView = view.find<ImageView>(R.id.icon)
         private val dateView = view.find<TextView>(R.id.date)
