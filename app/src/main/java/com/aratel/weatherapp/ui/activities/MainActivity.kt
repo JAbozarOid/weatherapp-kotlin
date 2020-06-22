@@ -11,6 +11,7 @@ import com.aratel.weatherapp.ui.adapters.ForecastListAdapter
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
+import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * This activity will render a list of daily forecasts for the next seven days
@@ -39,8 +40,9 @@ class MainActivity : AppCompatActivity() {
          */
         //message.text = "Hello Kotlin!"
 
-
-        val forecastList = findViewById<RecyclerView>(R.id.forecast_list)
+        // *** use findViewById when not using Kotlin Android Extensions
+        //val forecastList = findViewById<RecyclerView>(R.id.forecast_list)
+        // when import kotlinx.android.synthetic.main.activity_main.* it is not use findViewById
         forecastList.layoutManager = LinearLayoutManager(this)
 
         /**
