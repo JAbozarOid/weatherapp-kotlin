@@ -12,6 +12,7 @@ import com.aratel.weatherapp.domain.model.Forecast
 import com.aratel.weatherapp.domain.model.ForecastList
 import com.aratel.weatherapp.ui.utils.ctx
 import com.squareup.picasso.Picasso
+import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_forecast.view.*
 import org.jetbrains.anko.find
 import java.util.zip.Inflater
@@ -81,12 +82,16 @@ class ForecastListAdapter(
 
     // handle item_forecast view with this class
     class ViewHolder(
-        view: View,
+        //view: View,
         //val itemClick: OnItemClickListener
         // using lambdas for handling click on item
+        override val containerView: View,
         val itemClick: (Forecast) -> Unit
     ) :
-        RecyclerView.ViewHolder(view) {
+        RecyclerView.ViewHolder(
+            //view -> when using import kotlinx.android.synthetic.main.item_forecast.view.* NOT using view instead using containerView
+            containerView
+        ) , LayoutContainer {
 
         //private val iconView = view.find<ImageView>(R.id.icon)
         //private val dateView = view.find<TextView>(R.id.date)
@@ -97,12 +102,12 @@ class ForecastListAdapter(
         fun bindForecast(forecast: Forecast) {
             with(forecast) {
                 // *** when using import kotlinx.android.synthetic.main.item_forecast.view.* NOT using find
-                Picasso.get().load(iconUrl).into(itemView.icon)
-                itemView.date.text = date
-                itemView.description.text = description
-                itemView.maxTemperature.text = "${high}º"
-                itemView.minTemperature.text = "${low}º"
-                itemView.setOnClickListener { itemClick(this) }
+                Picasso.get().load(iconUrl).into(containerView.icon)
+                containerView.dateText.text = date
+                containerView.descriptionText.text = description
+                containerView.maxTemperature.text = "${high}º"
+                containerView.minTemperature.text = "${low}º"
+                containerView.setOnClickListener { itemClick(this) }
             }
         }
     }
